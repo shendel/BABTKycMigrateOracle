@@ -1,0 +1,19 @@
+{
+  "name": "babtkycmigrateoracle",
+  "version": "1.0.0",
+  "description": "BABT (BSC) KYC Migrate Oracle",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shendel/BABTKycMigrateOracle.git"
+  },
+  "author": "Alexander Shestopalov aka @eneeseene",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shendel/BABTKycMigrateOracle/issues"
+  },
+  "homepage": "https://github.com/shendel/BABTKycMigrateOracle#readme"
+}
