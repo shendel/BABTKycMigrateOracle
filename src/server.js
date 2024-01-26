@@ -66,7 +66,7 @@ app.use('/revoke/:address', async (req, res) => {
     activeWeb3.to.contract.methods.balanceOf(address).call().then((alreadyHasAttest) => {
       if (alreadyHasAttest != 0) {
         activeWeb3.from.contract.methods.balanceOf(address).call((sourceHasAttest) => {
-          if (sourceHasAttest == 0) {
+          if (sourceHasAttest != 1) {
             callContractMethod({
               activeWeb3: activeWeb3.to.web3,
               activeWallet: activeWeb3.oracleAddress,
@@ -102,7 +102,7 @@ app.use('/check/:address', async (req, res) => {
   const { address } = req.params
   if (isEvmAddress(address)) {
     activeWeb3.to.contract.methods.balanceOf(address).call().then((hasDestKyc) => {
-      activeWeb3.to.contract.methods.balanceOf(address).call().then((hasSourceKyc) => {
+      activeWeb3.from.contract.methods.balanceOf(address).call().then((hasSourceKyc) => {
         res.json({
           answer: "ok",
           source: (hasSourceKyc == 1),
