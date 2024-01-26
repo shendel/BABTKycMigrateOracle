@@ -2,9 +2,8 @@
   "name": "babtkycmigrateoracle",
   "version": "1.0.0",
   "description": "BABT (BSC) KYC Migrate Oracle",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./src/server.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +14,15 @@
   "bugs": {
     "url": "https://github.com/shendel/BABTKycMigrateOracle/issues"
   },
-  "homepage": "https://github.com/shendel/BABTKycMigrateOracle#readme"
+  "homepage": "https://github.com/shendel/BABTKycMigrateOracle#readme",
+  "dependencies": {
+    "@ethersproject/abi": "^5.7.0",
+    "bignumber.js": "^9.1.2",
+    "bip39": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "ethereumjs-wallet": "^1.0.1",
+    "express": "^4.18.2",
+    "web3": "^1.7.4"
+  }
 }
