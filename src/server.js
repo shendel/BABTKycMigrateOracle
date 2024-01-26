@@ -65,18 +65,26 @@ app.use('/revoke/:address', async (req, res) => {
   if (isEvmAddress(address)) {
     activeWeb3.to.contract.methods.balanceOf(address).call().then((alreadyHasAttest) => {
       if (alreadyHasAttest != 0) {
-        callContractMethod({
-          activeWeb3: activeWeb3.to.web3,
-          activeWallet: activeWeb3.oracleAddress,
-          contract: activeWeb3.to.contract,
-          method: 'revoke',
-          args: [
-            address,
-          ]
-        }).then((answer) => {
-          res.json({ answer: 'revoked' })
+        activeWeb3.from.contract.methods.balanceOf(address).call((sourceHasAttest) => {
+          if (sourceHasAttest == 0) {
+            callContractMethod({
+              activeWeb3: activeWeb3.to.web3,
+              activeWallet: activeWeb3.oracleAddress,
+              contract: activeWeb3.to.contract,
+              method: 'revoke',
+              args: [
+                address,
+              ]
+            }).then((answer) => {
+              res.json({ answer: 'revoked' })
+            }).catch((err) => {
+              res.json({ error: 'fail revoke' })
+            })
+          } else {
+            res.json({ error: 'Fail revoke, KYC attest exists in source chain' })
+          }
         }).catch((err) => {
-          res.json({ error: 'fail revoke' })
+          res.json({ error: 'fail check source attest' })
         })
       } else {
         res.json({ error: 'no kyc' })
