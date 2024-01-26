@@ -90,6 +90,26 @@ app.use('/revoke/:address', async (req, res) => {
   }
 })
 
+app.use('/check/:address', async (req, res) => {
+  const { address } = req.params
+  if (isEvmAddress(address)) {
+    activeWeb3.to.contract.methods.balanceOf(address).call().then((hasDestKyc) => {
+      activeWeb3.to.contract.methods.balanceOf(address).call().then((hasSourceKyc) => {
+        res.json({
+          answer: "ok",
+          source: (hasSourceKyc == 1),
+          dest: (hasDestKyc == 1)
+        })
+      }).catch((err) => {
+        res.json({ error: 'fail check kyc in dest chain' })
+      })
+    }).catch((err) => {
+      res.json({ error: 'fail check kyc in source chain' })
+    })
+  } else {
+    res.json({ error: 'wrong address' })
+  }
+})
 
 app.listen(server_port, server_ip, () => {
   console.log(`KYC Oracle started at http://${server_ip}:${server_port}`)
