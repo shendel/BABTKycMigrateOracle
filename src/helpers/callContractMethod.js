@@ -26,7 +26,6 @@ const callContractMethod = (options) => {
       )
       const gasPrice = await activeWeb3.eth.getGasPrice()
       sendArgs.gasPrice = gasPrice
-
       let txHash
       contract.methods[method](...(args || []))
         .send(sendArgs)

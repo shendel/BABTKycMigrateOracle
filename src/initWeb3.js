@@ -34,7 +34,7 @@ const initWeb3 = () => {
   console.log('>>>> Init KYC Contracts')
   const from_kyc = new from_web3.eth.Contract(KYCContractData.abi, FROM_CONTRACT)
   console.log('>>> KYC contract from inited', FROM_CONTRACT)
-  const to_kyc = new from_web3.eth.Contract(KYCContractData.abi, TO_CONTRACT)
+  const to_kyc = new to_web3.eth.Contract(KYCContractData.abi, TO_CONTRACT)
   console.log('>>> KYC contract to inited', TO_CONTRACT)
   return {
     oracleAddress: wallet.address,
